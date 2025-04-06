@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Header from "./comps/Header";
+import headerOne from '../../assets/landing.jpeg'
+import logoImage from '../../assets/LOGO-removebg-preview.png'
 
 export const metadata = {
   title: 'Home',
@@ -8,46 +9,51 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div>
-      <Header />
+    <div className="h-screen w-full overflow-hidden relative">
+      {/* Background Image with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={headerOne}
+          alt="header background"
+          fill
+          className="object-cover brightness-50" // Makes image darker
+          priority
+        />
+        {/* Additional dark overlay for better contrast */}
 
-
-      <div className="px-[10%] mt-[50px] flex items-start gap-5 justify-start">
-
-        <div className="flex flex-col gap-5 w-full">
-          <div className="font-bold text-[3.8rem] leading-[99%]">
-            "
-            Masarap sa unang tingin, pag-kinain gusto mo ng ulit-ulitin.
-            "
-          </div>
-          <p className="text-[#888]">
-            For individuals aspiring to venture into the food industry
-            or enhance their culinary expertise, Developing Delectable Cuisine serves as a crucial asset.
-          </p>
-
-          <div className="relative">
-            <input
-              className="w-[300px] py-[10px] px-[20px] rounded-[30px] border border-[#888] outline-none w-full"
-              type="text"
-              placeholder="Find more of our specialty"
-            />
-            <div className="bg-yellow-500 px-[20px] py-[5px] rounded-[30px] font-bold absolute top-[5px] right-[10px] hover: cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search-icon lucide-search"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-            </div>
-          </div>
-        </div>
-
-
-
-        <div className="w-full bg-red-500 h-[450px] rounded-[3rem]">
-         
-        </div>
       </div>
 
+      {/* Centered Modal - Now properly centered */}
+      <div className="absolute left-[50%] top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex  flex-col md:flex-row gap-8 items-center p-8 w-full max-w-6xl px-4">
+        {/* Logo Section */}
+        <div className="flex-shrink-0 w-full md:w-auto mb-auto">
+          <div className="flex justify-center">
+            <Image
+              src={logoImage}
+              alt="logo"
+              width={800} // Reduced from 1000 for better proportion
+              height={500} // Reduced from 500
+              className="object-contain "
+              priority
+            />
+          </div>
+          <p className="text-white text-center text-xl md:text-2xl mt-4 font-bold drop-shadow-lg">
+            "MASARAP SA UNANG TINGIN, PAG-KINAIN GUSTO MO NG ULIT-ULITIN"
+          </p>
+        </div>
 
-
+        {/* Navigation Buttons */}
+        <div className="bg-white bg-opacity-90 flex flex-col gap-4 items-center rounded-xl p-6 shadow-xl w-[500px]">
+          {['OUR MENU', 'RESERVATION', 'ORDER FORM', 'FAQS', 'ABOUT US', 'CONTACT US'].map((item) => (
+            <button 
+              key={item}
+              className="w-full py-5 px-[8rem] bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition-colors font-medium text-lg"
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
-
-
